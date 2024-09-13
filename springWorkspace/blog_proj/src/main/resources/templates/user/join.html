@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/user_tmp}">
+	<section layout:fragment="main" class="d-flex vh-100">
+		<div
+			class="container mx-auto row justify-content align-content center">
+			<div class="card bg-dark">
+				<div class="card-body p-5 text-center">
+					<h2 class="text-white">회원가입</h2>
+					<p class="text-white mt-2 mb-5">진행</p>
+					<div class="mb-2">
+						<form action="/join" method="POST">
+							<div class="mb-3">
+								<label class="form-label text-white">이메일</label> <input type="email"
+									class="form-control" name="email" required />
+							</div>
+							<div class="mb-3">
+								<label class="form-label text-white">비밀번호</label> <input type="password"
+									class="form-control" name="password" required />
+							</div>
+							<button class="btn btn-primary ">회원가입</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</html>

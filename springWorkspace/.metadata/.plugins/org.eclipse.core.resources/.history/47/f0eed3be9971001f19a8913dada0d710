@@ -1,0 +1,20 @@
+package com.kosta.domain.request;
+
+import com.kosta.entity.ImageFile;
+import com.kosta.entity.Product;
+import com.kosta.entity.User;
+
+import lombok.Data;
+
+@Data
+public class ProductAddRequest {
+	private Long id;
+	private String name;
+	private double price;
+	private ImageFile imageFile;
+	private Long authorId;
+
+	public Product toEntity(User user) {
+		return Product.builder().name(name).price(price).author(user).image(imageFile).build();
+	}
+}

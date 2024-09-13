@@ -1,0 +1,11 @@
+package com.kosta.utils;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+public class FileUtils {
+
+	@Value("${spring.upload.location}")
+	private String uploadPath;
+}

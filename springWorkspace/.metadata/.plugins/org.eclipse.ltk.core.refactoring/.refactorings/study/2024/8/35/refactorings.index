@@ -1,0 +1,53 @@
+1724632324203	Rename resource 'application.properties'
+1724634555808	Copy package
+1724634612253	Copy package
+1724637557708	Copy compilation unit
+1724638334802	Copy compilation unit
+1724642064381	Delete element
+1724651049533	Copy compilation unit
+1724651629362	Copy compilation unit
+1724651981452	Extract local variable 'encode'
+1724652951972	Delete element
+1724657294843	Copy file
+1724657537199	Rename resource 'main.html'
+1724659354067	Rename resource 'index.html'
+1724659838238	Rename resource 'login.html'
+1724662008344	Copy file
+1724662048088	Delete element
+1724662709627	Move file
+1724722690732	Rename package 'templates.layouts'
+1724722698018	Rename resource 'user_tmp.html'
+1724722756501	Rename resource 'header.html'
+1724722762368	Rename resource 'user_temp.html'
+1724723660755	Rename resource 'user_tmp.html'
+1724723915439	Copy file
+1724726202222	Rename package 'templates.user_layouts'
+1724727555670	Rename package 'templates.group'
+1724728324848	Copy compilation unit
+1724728992596	Rename package 'templates.groups'
+1724729003181	Move file
+1724736305157	Delete element
+1724737012306	Copy file
+1724737088858	Copy file
+1724741058138	Extract local variable 'byId'
+1724741152539	Extract local variable 'finbById'
+1724807176944	Delete element
+1724810017421	Copy compilation unit
+1724811288826	Extract local variable 'member'
+1724823828444	Copy file
+1724827402618	Delete element
+1724827433197	Copy file
+1724828508194	Rename resource 'mypage.html'
+1724898665785	Copy compilation unit
+1724898671517	Rename type 'Group'
+1724898674451	Copy compilation unit
+1724898679478	Rename type 'Member'
+1724899383658	Extract local variable 'list'
+1724899667158	Extract local variable 'list'
+1724899768509	Extract local variable 'list'
+1724901002895	Extract local variable 'filter'
+1724901017354	Extract local variable 'list2'
+1724901067020	Extract local variable 'list2'
+1724901171434	Extract local variable 'list2'
+1724901796136	Extract local variable 'byGroupId'
+1724901854726	Extract local variable 'anyMatch'

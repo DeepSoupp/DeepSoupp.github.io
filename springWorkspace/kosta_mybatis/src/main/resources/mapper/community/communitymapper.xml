@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.mapper.CommunityMapper">
+	<resultMap type="com.kosta.dto.Community" id="communityMap">
+		<id property="id" column="comm_id" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="hit" column="hit" />
+		<result property="createdAt" column="comm_created_at" />
+		<association property="creator"
+			javaType="com.kosta.dto.User">
+			<id property="id" column="creator_id" />
+			<result property="name" column="name" />
+			<result property="email" column="email" />
+			<result property="createdAt" column="user_created_at" />
+		</association>
+	</resultMap>
+	
+	<select id="findById" resultMap="communityMap" parameterType="int">
+		   SELECT 
+            ct.id AS comm_id,  ct.title,  ct.content,  ct.hit,  ct.creator_id, 
+            ct.created_at AS comm_created_at, 
+            ut.name,  ut.email,  ut.created_at AS user_created_at
+        FROM community_tbl ct
+        LEFT JOIN users_tbl ut ON ct.creator_id = ut.id
+        WHERE ct.is_deleted = 'n' AND ct.id = #{id}
+	</select>
+	<select id="findFilesByCommunityId" resultType="com.kosta.dto.CommunityFile" parameterType="int">
+		SELECT * FROM community_file_tbl WHERE community_id = #{id} 
+	</select>
+	
+	<select id="findAll" resultMap="communityMap">
+		SELECT
+		ct.id AS comm_id, ct.title, ct.content, ct.hit, ct.creator_id,
+		ct.created_at AS comm_created_at,
+		ut.name, ut.email, ut.created_at AS user_created_at
+		FROM community_tbl ct
+		LEFT JOIN users_tbl ut ON ct.creator_id = ut.id
+		WHERE
+		ct.is_deleted = 'n'
+	</select>
+
+	<insert id="save" parameterType="com.kosta.dto.Community"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO community_tbl (title,
+		content, creator_id) VALUES (#{title},#{content},#{creator.id})
+	</insert>
+	<insert id="insertFiles"
+		parameterType="com.kosta.dto.CommunityFile">
+		INSERT INTO community_file_tbl (community_id, origin_file_name,
+		stored_file_path, file_size)
+		VALUES
+		<foreach collection="list" item="f" separator=",">
+			(#{f.communityId}, #{f.originFileName}, #{f.storedFilePath},
+			#{f.fileSize})
+		</foreach>
+	</insert>
+</mapper>

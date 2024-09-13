@@ -1,0 +1,13 @@
+package com.kosta.config;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+
+import jakarta.servlet.http.HttpServletResponse;
+
+@Service
+public class JwtAuthenticationService {
+	void successAuthentication(HttpServletResponse response, Authentication authResult) {
+		User user = (User) authResult.getPrincipal();
+	};
+}

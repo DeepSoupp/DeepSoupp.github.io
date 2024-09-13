@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;memberById&apos; from expression &apos;getMemberById(member.getId())&apos;&#x0D;&#x0A;- Original project: &apos;jpa_proj&apos;&#x0D;&#x0A;- Variable name: &apos;memberById&apos;&#x0D;&#x0A;- Destination method: &apos;com.kosta.service.MemberServiceImpl.modifyMember(...)&apos;&#x0D;&#x0A;- Variable expression: &apos;getMemberById(member.getId())&apos;&#x0D;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;memberById&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;com.kosta.service{MemberServiceImpl.java" name="memberById" replace="true" replaceAllInThisFile="false" selection="1046 29" stamp="1724202341724" varType="false" version="1.0"/>
+</session>

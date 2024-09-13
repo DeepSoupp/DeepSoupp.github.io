@@ -1,0 +1,35 @@
+package com.kosta.service.Impl;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.kosta.domain.request.UserJoinRequest;
+import com.kosta.domain.response.UserResponse;
+import com.kosta.entity.User;
+import com.kosta.repository.UserRepository;
+import com.kosta.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final UserRepository userRepository;
+
+	// 회원가입
+	@Override
+	public UserResponse join(UserJoinRequest join) {
+		String encodedPassword = bCryptPasswordEncoder.encode(join.getPassword());
+		User user = User.builder().email(join.getEmail()).name(join.getName()).password(encodedPassword).build();
+		User savedUser = userRepository.save(user);
+		return UserResponse.toDTO(savedUser);
+	}
+
+	// 이메일 중복 체크
+	@Override
+	public boolean duplicateCheckEmail(String email) {
+		return !userRepository.existsByEmail(email);
+	}
+
+}

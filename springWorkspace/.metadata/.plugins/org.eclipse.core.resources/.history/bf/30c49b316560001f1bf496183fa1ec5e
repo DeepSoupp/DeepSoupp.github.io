@@ -1,0 +1,15 @@
+package com.kosta.service;
+
+import org.springframework.stereotype.Service;
+
+import com.kosta.entity.User;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Override
+	public Long save(User user) {
+		return null;
+	}
+
+}

@@ -1,0 +1,37 @@
+package com.kosta.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import lombok.RequiredArgsConstructor;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class WebSecurityConfig {
+
+	// 암호화 빈
+	@Bean
+	BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	// HRRP 요청에 따른 보안 구성
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		
+		// 경로 권한 설정
+		http.authorizeHttpRequests(auth -> 
+		// 특정 URL 경로에 대해서는 인증 없이 접근 가능
+		auth.requestMatchers(
+				new AntPathRequestMatcher("/api/auth/login"), // 로그인
+				new AntPathRequestMatcher("/api/auth/signup"), // 회원가입
+				new AntPathRequestMatcher(".api/auth/duplicate"))); // 이메일 중복체크
+		return http.getOrBuild();
+	}
+}

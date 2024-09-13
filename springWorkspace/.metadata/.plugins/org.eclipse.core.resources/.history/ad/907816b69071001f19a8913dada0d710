@@ -1,0 +1,82 @@
+package com.kosta.service.Impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kosta.domain.request.ProductAddRequest;
+import com.kosta.domain.request.ProductDeleteRequest;
+import com.kosta.domain.request.ProductEditRequest;
+import com.kosta.domain.response.ProductResponse;
+import com.kosta.entity.ImageFile;
+import com.kosta.entity.Product;
+import com.kosta.entity.User;
+import com.kosta.repository.ProductRepository;
+import com.kosta.repository.UserRepository;
+import com.kosta.service.ImageFileService;
+import com.kosta.service.ProductService;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class ProductServiceImpl implements ProductService {
+	private final ProductRepository productRepository;
+	private final ImageFileService imageFileService;
+	private final UserRepository userRepository;
+
+	// 상품추가
+	@Override
+	public ProductResponse addProdict(ProductAddRequest productDTO, MultipartFile file) {
+		// 이지미 파일을 저장하고 반환
+		ImageFile savedImageFile = imageFileService.saveImage(file);
+		if (savedImageFile != null) {
+			// DTO 에 넣기
+			productDTO.setImageFile(savedImageFile);
+		}
+		// 작성자 ID 로 User 엔티티 찿기
+		User user = userRepository.findById(productDTO.getAuthorId())
+				.orElseThrow(() -> new IllegalArgumentException("없는 사용자"));
+		// ProductRequest 객체를 Product 엔티티로 변환
+		Product product = productDTO.toEntity(user);
+		// Product 엔티티를 DB 에 저장
+		Product saveProduct = productRepository.save(product);
+		// 저장된 Product 엔티티를 PostResponse DTO 변환하고 반환
+		ProductResponse result = ProductResponse.toDto(saveProduct);
+		return result;
+	}
+
+	// 상품삭제
+	@Override
+	public ProductResponse deleteProduct(Long id, ProductDeleteRequest productDTO) {
+		User user = userRepository.findById(productDTO.getAuthorId())
+				.orElseThrow(() -> new IllegalArgumentException("없는 사용자"));
+		Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("없는 게시물"));
+
+		if (!product.getAuthor().getId().equals(user.getId())) {
+			throw new IllegalArgumentException("본인이 아님");
+		}
+		productRepository.delete(product);
+		return ProductResponse.toDto(product);
+	}
+
+	// 상품수정
+	@Override
+	public ProductResponse editProduct(ProductEditRequest product, MultipartFile file) {
+		return null;
+	}
+
+	// 상품디테일
+	@Override
+	public ProductResponse getProductById(Long id) {
+		return null;
+	}
+
+	// 상품리스트
+	@Override
+	public List<ProductResponse> getAllProduct() {
+		return null;
+	}
+
+}

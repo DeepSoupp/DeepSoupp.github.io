@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.board.mapper.BoardMapper">
+	<select id="selectBoardList" resultType="com.board.dto.BoardDTO">
+		SELECT id, title, hit,
+		created_at FROM board_tbl WHERE is_deleted = "n"
+	</select>
+	<insert id="insertBoard" parameterType="com.board.dto.BoardDTO"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO board_tbl
+		(title,content,created_at, creator) VALUES
+		(#{title},#{content},NOW(),"박진국")
+	</insert>
+	<select id="selectBoardById" resultType="com.board.dto.BoardDTO"
+		parameterType="int">
+		SELECT id, title, content, hit, created_at, creator FROM
+		board_tbl WHERE id = #{id} AND is_deleted = 'n'
+	</select>
+	<update id="updateBoard" parameterType="com.board.dto.BoardDTO">
+		UPDATE board_tbl SET
+		title = #{title}, content = #{content} WHERE id = #{id}
+	</update>
+	<update id="updateHit" parameterType="int">
+		UPDATE board_tbl SET hit =
+		hit + 1 WHERE id = #{id}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		UPDATE board_tbl SET
+		is_deleted = 'y' WHERE id = #{id}
+	</delete>
+</mapper>

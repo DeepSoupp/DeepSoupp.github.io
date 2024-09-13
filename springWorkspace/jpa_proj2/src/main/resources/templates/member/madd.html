@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	 <div class="container mt-5">
+        <h1 class="mb-4" th:text="${member == null ? 'ADD MEMBER' : 'MODIFY MEMBER'}"></h1>
+        <form th:action="${member == null ? '/add' : '/modify'}" method="post">
+            <div class="form-group">
+                <input type="hidden" name="id" th:if="${member != null}" th:value="${member.id}">
+                <label for="name">이름</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="NAME" th:value="${member == null ? '' : member.name}">
+            </div>
+            <button type="submit" class="btn btn-primary">저장</button>
+            <a href="/list" class="btn btn-secondary">취소</a>
+        </form>
+    </div>
+</body>
+</html>
+

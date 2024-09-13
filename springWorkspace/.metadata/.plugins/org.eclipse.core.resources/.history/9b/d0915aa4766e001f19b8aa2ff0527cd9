@@ -1,0 +1,37 @@
+package com.kosta.config;
+
+import java.io.IOException;
+
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequiredArgsConstructor
+public class JwtAuthenticationFilter extends OncePerRequestFilter{
+	private final JwtProvider jwtProvider;
+	private final static String HEADER_AUTHORIZATION = "Authorization";
+	private final static String TOKEN_PREFIX = "Bearer ";
+	
+	
+	// HTTP 요청이 들어올 떄마다 실행되는 필터
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		String header = request.getHeader(HEADER_AUTHORIZATION);
+		String token = getAccessToken(header);
+		log.info("순수한 토큰 {}",token);
+	}
+	private String getAccessToken(String header) {
+		log.info("[getAccessTOken] 토큰 값 추출, {}", header);
+		if (header != null && header.startsWith(TOKEN_PREFIX)) {
+			return header.substring(TOKEN_PREFIX.length());
+		}
+		return null;
+	}
+}

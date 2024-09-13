@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+	<link rel="icon" href="data:,">
+</head>
+<body>
+	<div class="p-5 mb-5 text-center bg-dark-subtle">
+		<h1 class="mb-3">My Blog</h1>
+		<h4 class="mb-3">환영합니다.</h4>
+	</div>
+	<div class="container my-5">
+		<div class="row">
+			<article>
+				<form 
+					th:action="${article ne null ? '/blog/modify' : '/blog/add'}"
+					th:method="${article ne null ? 'PATCH' : 'POST'}"
+				>
+					<input
+						type="hidden"
+						name="id"
+						th:if="${article ne null}"
+						th:value="${article.id}"
+					/>
+					<header class="mb-4">
+						<div class='input-group'>
+							<span class="input-group-text">제목</span>
+							<input
+								class="form-control"
+								name="title"
+								placeholder="제목을 입력하세요"
+								th:value="${article ne null ? article.title : ''}" 
+							/>
+						</div>
+						
+					</header>
+					<section class="mb-4">
+						<div class='input-group'>
+							<span class="input-group-text">내용</span>
+							<textarea
+								class="form-control"
+								name="content"
+								rows='5'
+								placeholder="내용을 입력하세요"
+								th:text="${article ne null ? article.content : ''}">
+							</textarea>
+						</div>
+					</section>
+					<a
+						href="/blog/list"
+						class='btn btn-primary btn-sm'>
+						목록으로 이동
+					</a>
+					<button class="btn btn-success btn-sm">
+						[[ ${article ne null ? '수정하기' : '저장하기'} ]]
+					</button>
+				</form>
+			</article>
+		</div>
+	</div>
+</body>
+</html>

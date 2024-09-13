@@ -1,0 +1,25 @@
+package com.kosta.service.Impl;
+
+import org.springframework.stereotype.Service;
+
+import com.kosta.domain.request.UserJoinRequest;
+import com.kosta.domain.response.UserResponse;
+import com.kosta.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService{
+	// 회원가입
+	@Override
+	public UserResponse join(UserJoinRequest join) {
+		return null;
+	}
+	// 이메일 중복 체크
+	@Override
+	public boolean duplicateCheckEmail(String email) {
+		return false;
+	}
+	
+}

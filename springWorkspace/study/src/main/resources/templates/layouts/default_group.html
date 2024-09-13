@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8">
+<title>Study Group</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+<link rel="icon" href="data:," />
+<style>
+.card {
+	border: 2px solid #ffffff;
+	border-radius: 1rem;
+	background-color: transparent;
+}
+
+.card-body {
+	color: #ffffff;
+}
+
+.card-title {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.card-subtitle, .card-text {
+	color: #d6d6d6;
+}
+
+.btn-outline-light {
+	border-color: #ffffff;
+	color: #ffffff;
+}
+
+.btn-outline-light:hover {
+	background-color: #ffffff;
+	color: #212529;
+}
+
+.custom-card {
+	background-color: transparent;
+	border: 1px solid #ffffff;
+	border-radius: 0.5rem;
+	padding: 1.5rem;
+	margin-bottom: 20px;
+	max-width: 600px; /* 너비를 줄입니다 */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.custom-card hr {
+	border-top: 1px solid #ffffff;
+}
+
+.my-page-card-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+.my-page-card-body {
+	color: #d6d6d6;
+}
+
+.dropdown-menu {
+	background-color: #212529;
+	border: 1px solid #ffffff;
+}
+
+.dropdown-item {
+	color: #d6d6d6;
+}
+
+.dropdown-item:hover {
+	background-color: #495057;
+	color: #ffffff;
+}
+
+.form-label {
+	color: #ffffff;
+}
+
+.form-control {
+	background-color: #212529; /* 기본 배경색 */
+	color: #ffffff; /* 텍스트 색상 */
+	border: 1px solid #ffffff; /* 기본 테두리 색상 */
+}
+
+.form-control:focus {
+	background-color: #212529; /* 포커스 시에도 배경색을 유지 */
+	color: #ffffff; /* 포커스 시에도 텍스트 색상 유지 */
+	border-color: #ffffff; /* 포커스 시 테두리 색상 */
+	box-shadow: none; /* 포커스 시 그림자 제거 */
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.btn-primary:hover {
+	background-color: #0056b3;
+	border-color: #004085;
+}
+
+/* 추가된 그룹 관련 버튼 스타일 */
+.button-group {
+	display: flex;
+	justify-content: flex-start; /* 왼쪽 정렬 */
+	margin-top: 20px; /* 위쪽 여백 */
+}
+
+.button-group .btn {
+	margin: 0; /* 버튼 기본 여백 제거 */
+}
+
+.member-list {
+	margin-top: 1rem;
+}
+
+
+.group-title {
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: #ffffff;
+	cursor: pointer; /* 클릭 가능 표시 */
+}
+
+.member-list li {
+	padding: 0.5rem 0;
+}
+
+.leader {
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.member {
+	color: #d6d6d6;
+}
+
+.collapse {
+	margin-top: 1rem;
+}
+</style>
+</head>
+
+<body class="bg-dark text-white d-flex flex-column">
+	<header th:replace="~{layouts/group_header::h}"></header>
+
+	<div layout:fragment="index">
+		<div class="container"></div>
+	</div>
+</body>
+</html>

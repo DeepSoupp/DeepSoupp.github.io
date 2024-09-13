@@ -1,0 +1,22 @@
+package com.kosta.service;
+
+import java.util.List;
+
+import com.kosta.domain.UserSignUpRequest;
+import com.kosta.domain.LoginResponse;
+import com.kosta.domain.UserDeleteRequest;
+import com.kosta.domain.UserResponse;
+import com.kosta.domain.UserUpdateRequest;
+
+public interface UserService {
+	UserResponse signUp(UserSignUpRequest sign);
+
+	List<UserResponse> getUserList();
+
+	UserResponse updateUser(UserUpdateRequest update);
+
+	void deleteUser(UserDeleteRequest userDeleteRequest);
+	
+	boolean duplicateCheckEmail(String email);
+
+}

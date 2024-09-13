@@ -1,0 +1,21 @@
+spring:
+    application:
+        name: rest_blog
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/rest_blog_db
+        username: root
+        password: 1234
+    jpa:
+        generate-ddl: true
+        show-sql: true
+        open-in-view: false
+    sql:
+        init:
+          mode: never
+    upload:
+        location: C:\\Users\\WD\\Desktop\\images
+jwt:
+  issuer: kosta-jk
+  secret_key: mysecretmysecretmysecretmysecret
+  access_duration: 1800000  #30분(30 * 60 * 1000)			

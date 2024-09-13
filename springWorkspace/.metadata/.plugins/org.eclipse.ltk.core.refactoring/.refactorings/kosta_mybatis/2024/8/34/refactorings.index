@@ -1,0 +1,29 @@
+1724026580361	Rename resource 'application.properties'
+1724027302997	Copy compilation unit
+1724027313808	Copy package
+1724027338871	Rename type 'Community'
+1724027356396	Rename type 'CommunityFile'
+1724027360989	Delete element
+1724027371849	Copy package
+1724027383678	Rename type 'CommunityService'
+1724027395236	Rename type 'UserService'
+1724027474121	Copy compilation unit
+1724027490483	Copy compilation unit
+1724027532791	Copy compilation unit
+1724028671456	Copy package
+1724028681900	Rename resource 'usermapper.xml'
+1724030297211	Extract local variable 'user2'
+1724033616541	Copy package
+1724033623247	Rename resource 'default.html'
+1724033651778	Rename resource 'header.html'
+1724033666874	Copy file
+1724033839792	Copy file
+1724033971417	Rename resource 'add.html'
+1724036713771	Copy file
+1724038422793	Copy file
+1724048429138	Copy package
+1724048437469	Rename resource 'default.html'
+1724048926846	Copy file
+1724051744423	Extract local variable 'byId'
+1724052187957	Extract local variable 'originalFilename'
+1724210794646	Copy files

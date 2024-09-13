@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras-security"
+	layout:decorate="~{layouts/default_group}">
+
+	<div layout:fragment="index" class="container mt-4">
+        <h2 th:text="${group == null ? '그룹 추가' : '그룹 수정'}"></h2>
+        <form th:action="${group eq null ? '/group/add' : '/group/edit' }" method="post">
+        	<input type='hidden' th:unless="${group eq null}" th:value="${group.id}" name="id" />
+            <div class="mb-3">
+                <label for="groupTitle" class="form-label">그룹 제목</label>
+                <input type="text" class="form-control" id="groupTitle" name="groupTitle" th:value="${group != null ? group.groupTitle : ''}" required>
+            </div>
+            <div class="mb-3">
+                <label for="groupContent" class="form-label">그룹 내용</label>
+                <textarea class="form-control" id="groupContent" name="groupContent" th:text="${group != null ? group.groupContent : ''}" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-light">저장</button>
+        </form>
+    </div>
+</html>

@@ -1,0 +1,5 @@
+package com.kosta.repository;
+
+public class UserRepository {
+
+}

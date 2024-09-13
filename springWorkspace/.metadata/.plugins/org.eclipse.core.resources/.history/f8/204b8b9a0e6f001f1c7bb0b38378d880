@@ -1,0 +1,22 @@
+package com.kosta.config;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kosta.entity.User;
+
+import jakarta.servlet.http.HttpServletResponse;
+
+@Service
+public class JwtAuthenticationService {
+	void successAuthentication(HttpServletResponse response, Authentication authResult) {
+		User user = (User) authResult.getPrincipal();
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonResponse = objectMapper.writeValueAsString(user);
+		response.getWriter().write(jsonResponse);
+	};
+}

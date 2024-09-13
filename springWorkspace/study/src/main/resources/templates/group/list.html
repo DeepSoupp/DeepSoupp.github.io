@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras-security"
+	layout:decorate="~{layouts/default_group}">
+
+<div layout:fragment="index" class="list">
+	<div class="container mt-4">
+		<a href="/group/add" class="btn btn-outline-light">글쓰기</a>
+	</div>
+	<div class="container mt-4">
+		<h2 class="mb-4">그룹 목록</h2>
+		<div class="row">
+			<div class="col-md-4 mb-4" th:each="group : ${list}">
+                <div class="card h-100">
+                    <div class="card-body" th:onclick="|location.href='/group/detail/'+${group.id}|" role="button">
+                        <h6 class="card-subtitle mb-2">👨‍🎓 [[${group.leaderId.name}]]</h6>
+                        <h5 class="card-title">[[${group.groupTitle}]]</h5>
+                        <p class="card-text small">[[|${#temporals.format(group.createdAt, 'yyyy-MM-dd HH:mm')}| ]]</p>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+</html>

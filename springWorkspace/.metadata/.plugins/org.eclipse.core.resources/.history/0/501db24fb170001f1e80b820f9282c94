@@ -1,0 +1,17 @@
+package com.kosta.security;
+
+public class JwtProperties {
+
+	public long getAccessDuration() {
+		return 0;
+	}
+
+	public String getIssuer() {
+		return null;
+	}
+
+	public String getSecretKey() {
+		return null;
+	}
+
+}

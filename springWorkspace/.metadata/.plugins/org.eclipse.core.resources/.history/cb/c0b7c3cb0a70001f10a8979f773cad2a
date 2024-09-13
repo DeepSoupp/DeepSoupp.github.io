@@ -1,0 +1,67 @@
+package com.kosta.entity;
+
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.kosta.domain.RoleEnum;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+// security 와 통합하기 위해 UserDetails 인터페이스 구현
+public class User implements UserDetails {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(updatable = false)
+	private Long id; // 고유 식별자 id
+
+	@Column(nullable = false, unique = true)
+	private String email; // 사용자 이메일주소 -> 중복안됨
+
+	@Column(nullable = false)
+	private String name; // 사용자 이름
+
+	@Column(nullable = false)
+	private String password; // 사용자 비밀번호
+
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	@Builder.Default
+	private RoleEnum role = RoleEnum.ROLE_USER; // 사용자 역할
+
+	@Column(name = "refresh_token", nullable = true)
+	private String refreshToken; // JWT 토큰 갱신을 위한 refreshToken 
+	
+	// 사용지에게 부여된 권한을 반환 
+	// SimpleGrantedAuthority 객체로 반환
+	// return 권한 목록
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority(role.name()));
+	}
+	
+	// 사용자 이메일 반환 인증에 사용
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+}

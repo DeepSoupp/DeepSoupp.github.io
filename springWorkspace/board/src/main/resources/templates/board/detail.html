@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>게시물 상세보기</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+	<div class="container mt-5">
+		<h2 class="mb-4 text-center">게시물 상세보기</h2>
+		<form action="update" method="post">
+
+			<div class="mb-3">
+				<label class="form-label"> <strong>글 번호 : </strong>
+				</label>
+				<p th:text="${board.id}"></p>
+				<input name="id" type="hidden" th:value="${board.id}" />
+			</div>
+			<div class="mb-3">
+				<label class="form-label"> <strong>조회수 : </strong>
+				</label>
+				<p th:text="${board.hit}"></p>
+			</div>
+			<div class="mb-3">
+				<label class="form-label"> <strong>작성자 : </strong>
+				</label>
+				<p th:text="${board.creator}"></p>
+			</div>
+			<div class="mb-3">
+				<label class="form-label"> <strong>작성일 : </strong>
+				</label>
+				<p th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd')}"></p>
+			</div>
+			<div class="mb-3">
+				<label class="form-label"> <strong>제목 : </strong>
+				</label>
+				<div>
+					<input type="text" name="title" class="form-control"
+						th:value="${board.title}" required>
+				</div>
+			</div>
+			<div class="mb-3">
+				<label class="form-label"> <strong>내용 : </strong>
+				</label>
+				<div>
+					<textarea name="content" class="form-control" rows="10"
+						th:text="${board.content}" required></textarea>
+				</div>
+			</div>
+			<div class="mb-3">
+				<a class="mx-2 btn btn-outline-danger"
+				 	th:each="file : ${board.fileList}"
+				 	th:href="@{download(id=${file.id}, boardId=${file.boardId})}"
+				 	th:text="|${file.originFileName} (${file.fileSize} kb)|"></a>
+			</div>
+			<div class="text-center">
+				<a href="list" class="btn btn-dark">목록</a>
+				<button type="submit" class="btn btn-dark">수정</button>
+				<button type="button" 
+						class="btn btn-dark"
+						onclick="if(confirm('정말로 삭제??')){document.getElementById('deleteForm').submit();}">
+					 	삭제</button>
+			</div>
+		</form>
+		<form id="deleteForm" action="delete" method="post"
+			style="display: none">
+			<input type="hidden" name="id" th:value="${board.id}">
+		</form>
+	</div>
+</body>
+</html>

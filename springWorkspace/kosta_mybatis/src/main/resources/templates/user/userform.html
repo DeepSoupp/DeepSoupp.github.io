@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default}">
+<div layout:fragment="contents" class="container my-4"
+	style="padding-top: 60px">
+	<h2 class="mb-4">[[${user == null ? "SIGNUP" : "EDIT"}]]</h2>
+	<form th:action="${user == null ? '/user/add' : '/user/modify' }"
+		th:method="${user == null ? 'POST' : 'PATCH' }">
+		<input type="hidden" th:if="${user != null}" name="id"
+			th:value="${user.id}" />
+		<div class="mb-3">
+			<label for="name" class="form-label">NAME</label>
+			<input type="text"
+				class="form-control" id="name" name="name" placeholder="NAME" th:value="${user != null ? user.name : ''}" required>
+		</div>
+		<div class="mb-3">
+			<label for="email" class="form-label">EMAIL</label>
+			<input type="email" class="form-control" id="email" name="email" placeholder="E-Mail address" th:value="${user != null ? user.email : ''}" required>
+		</div>
+		<button type="button" class="btn btn-primary" onclick="location.href='/user/list'">BACK</button>
+		<button type="reset" class="btn btn-primary">RESET</button>
+		<button type="submit" class="btn btn-primary">[[${user == null ? "SIGNUP" : "EDIT"}]]</button>
+	</form>
+</div>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras-security"
+	layout:decorate="~{layouts/default_group}">
+
+<div layout:fragment="index" class="container mt-4">
+	<div class="custom-card">
+		<h2 class="mb-3">[[${group.groupTitle}]]</h2>
+		<hr class="my-4">
+		<p>[[${group.groupContent}]]</p>
+		<div class="button-group mt-4">
+			<div class="button-actions">
+				<form th:action="@{'/group/detail/'+${group.id}+'/join'}" method="post">
+					<button th:if="${!group.owned and !group.joined}" type="submit" class="btn btn-success">
+						참여하기
+					</button>
+				</form>
+
+				<form th:action="@{/group/detail/{groupId}/leave(groupId=${group.id})}" method="post">
+					<button th:if="${!group.owned and group.joined}" type="submit" class="btn btn-danger">
+						참여취소
+					</button>
+				</form>
+			</div>
+
+			<div class="action-buttons">
+				<form th:action="@{'/group/delete/' + ${group.id}}" method="post" style="display: inline;"
+					th:if="${group.owned}">
+					<input type="hidden" name="_method" value="DELETE" />
+					<button type="submit" class="btn btn-outline-danger">삭제</button>
+				</form>
+
+				<a th:if="${group.owned}"
+					th:href="@{'/group/edit/'+ ${group.id}}"
+					class="btn btn-outline-info">수정</a>
+
+				<a href="/group/list" class="btn btn-outline-secondary">뒤로가기</a>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

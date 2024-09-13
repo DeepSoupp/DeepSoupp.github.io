@@ -1,0 +1,19 @@
+package com.kosta.service;
+
+import com.kosta.domain.request.UserJoinRequest;
+import com.kosta.domain.request.UserUpdateRequest;
+import com.kosta.domain.response.UserResponse;
+
+public interface UserService {
+	// 회원가입 서비스
+	// 등록된 사용자 정보 담고있는 UserResponse 반환
+	UserResponse join(UserJoinRequest join);
+
+	// 회원가입 시 이메일 중복체크 기능
+	boolean duplicateCheckEmail(String email);
+
+	// 사용자 정보 수정 (이름만)
+	UserResponse updateUser(UserUpdateRequest updateUser) {
+		
+	}
+}

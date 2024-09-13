@@ -1,0 +1,33 @@
+package com.kosta.security;
+
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Component
+@ConfigurationProperties("jwt")
+public class JwtProperties {
+
+	public long getAccessDuration() {
+		return 0;
+	}
+
+	public String getIssuer() {
+		return null;
+	}
+
+	public String getSecretKey() {
+		return null;
+	}
+
+	public long getRefreshDuration() {
+		return 0;
+	}
+
+}

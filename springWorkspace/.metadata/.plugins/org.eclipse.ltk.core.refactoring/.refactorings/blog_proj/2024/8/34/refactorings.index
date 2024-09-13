@@ -1,0 +1,44 @@
+1724216993769	Copy package
+1724217024358	Copy package
+1724217038052	Copy package
+1724217047445	Rename package 'com.kosta.entity.respository'
+1724217066881	Copy package
+1724217088050	Rename resource 'application.properties'
+1724218286386	Rename package 'com.kosta.respository'
+1724218864710	Copy compilation unit
+1724220582709	Extract local variable 'all'
+1724220971846	Extract local variable 'all'
+1724221061863	Copy file
+1724221642928	Extract local variable 'savedArticle'
+1724221723296	Extract local variable 'optArticle'
+1724222012237	Extract local variable 'optArticle'
+1724222062191	Extract local variable 'article'
+1724222262917	Extract local variable 'article'
+1724222458259	Copy file
+1724222558539	Copy file
+1724223722832	Extract local variable 'save'
+1724224698731	Extract local variable 'byId'
+1724225609000	Extract local variable 'foundArticle'
+1724225991548	Extract local variable 'byId'
+1724285713702	Extract local variable 'byTitleContainsOrContentContainsOrderByTitleAsc'
+1724285741786	Extract local variable 'savedArticle1'
+1724285746456	Extract local variable 'savedArticle2'
+1724290757240	Copy file
+1724293863471	Copy file
+1724308011460	Copy compilation unit
+1724308848222	Copy file
+1724308889584	Rename resource 'list2.html'
+1724372136396	Copy files
+1724389947098	Extract local variable 'auth'
+1724396551885	Copy package
+1724396553926	Move file
+1724396556111	Move file
+1724396574061	Move file
+1724396613821	Move files
+1724396915313	Copy file
+1724396920475	Rename resource 'detail.html'
+1724397150889	Copy file
+1724398096931	Copy file
+1724398504607	Rename resource 'user_temp.html'
+1724400272736	Copy file
+1724400277895	Rename resource 'form.html'

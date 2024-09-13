@@ -1,0 +1,57 @@
+package com.kosta.service.Impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kosta.domain.request.ProductAddRequest;
+import com.kosta.domain.request.ProductDeleteRequest;
+import com.kosta.domain.request.ProductEditRequest;
+import com.kosta.domain.response.ProductResponse;
+import com.kosta.entity.ImageFile;
+import com.kosta.repository.ProductRepository;
+import com.kosta.repository.UserRepository;
+import com.kosta.service.ImageFileService;
+import com.kosta.service.ProductService;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class ProductServiceImpl implements ProductService {
+	private final ProductRepository productRepository;
+	private ImageFileService imageFileService;
+
+	// 상품추가
+	@Override
+	public ProductResponse addProdict(ProductAddRequest product, MultipartFile file) {
+		ImageFile savedImageFile = imagef
+		return null;
+	}
+
+	// 상품삭제
+	@Override
+	public ProductResponse deleteProduct(Long id, ProductDeleteRequest product) {
+		return null;
+	}
+
+	// 상품수정
+	@Override
+	public ProductResponse editProduct(ProductEditRequest product, MultipartFile file) {
+		return null;
+	}
+
+	// 상품디테일
+	@Override
+	public ProductResponse getProductById(Long id) {
+		return null;
+	}
+
+	// 상품리스트
+	@Override
+	public List<ProductResponse> getAllProduct() {
+		return null;
+	}
+
+}

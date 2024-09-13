@@ -1,0 +1,123 @@
+package com.kosta.config;
+
+import java.util.Collections;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import com.kosta.repository.UserRepository;
+import com.kosta.security.JwtAuthenticationFilter;
+import com.kosta.security.JwtAuthenticationService;
+import com.kosta.security.JwtProperties;
+import com.kosta.security.JwtProvider;
+import com.kosta.security.LoginCustomAuthenticationFilter;
+import com.kosta.utils.TokenUtils;
+
+import lombok.RequiredArgsConstructor;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class WebSecurityConfig {
+	private final UserDetailsService userDetailsService;
+	private final JwtProperties jwtProperties;
+	private final UserRepository userRepository;
+
+	// SecurityFilterChain 구성
+	// HRRP 요청에 따른 보안 구성
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		// 경로 권한을 설정하자
+		http
+			.authorizeHttpRequests(auth ->
+				// 특정 URL 경로에대해 인증 없이 접근 가능
+				auth.requestMatchers(
+					new AntPathRequestMatcher("/api/user/join"), // 회원가입
+					new AntPathRequestMatcher("/img/**"), // 이미지
+					new AntPathRequestMatcher("/api/user/duplicate"), // 이메일 중복체크
+					new AntPathRequestMatcher("/api/user/refresh-token") // 토큰 재발급
+//					new AntPathRequestMatcher("/api/product/**", "GET") // 상품
+				).permitAll() // 인증 없이 가능
+			.requestMatchers(
+					new AntPathRequestMatcher("/api/product/**")
+			).hasRole("ADMIN") // ProductController 중 나머지는 관리자만 !
+			.anyRequest().authenticated()
+			) // 그 외에는 인증한 사용자만
+			// 무상태성 세션 관리
+			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+			// 특정 경로에 대한 필터 추가
+			.addFilterBefore(
+				new LoginCustomAuthenticationFilter(authenticationManager(), jwtAuthenticationService()),
+				UsernamePasswordAuthenticationFilter.class
+			)
+			// (토큰을 통해 검증할 수 있도록) 필터 추가
+			.addFilterBefore(new JwtAuthenticationFilter(jwtProvider()), UsernamePasswordAuthenticationFilter.class)
+			// HTTP 기본설정
+			.httpBasic(HttpBasicConfigurer::disable)
+			// CSRF 비활성화
+			.csrf(AbstractHttpConfigurer::disable)
+			// CORS 설정
+			.cors(corsConfig -> corsConfig.configurationSource(corsConfigurationSource()));
+
+		return http.getOrBuild();
+	}
+
+	// CORS 설정 정의
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		return request -> {
+			CorsConfiguration config = new CorsConfiguration();
+			config.setAllowedHeaders(Collections.singletonList("*"));
+			config.setAllowedMethods(Collections.singletonList("*"));
+			config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:3000"));
+			config.setAllowCredentials(true);
+			return config;
+		};
+	}
+
+	// 2. JWT 관련 설정
+	@Bean
+	JwtProvider jwtProvider() {
+		return new JwtProvider(userDetailsService, jwtProperties);
+	}
+
+	private TokenUtils tokenUtils() {
+		return new TokenUtils(jwtProvider());
+	}
+
+	private JwtAuthenticationService jwtAuthenticationService() {
+		return new JwtAuthenticationService(tokenUtils(), userRepository);
+	}
+
+	// 인증 관리자 (AuthenticationManager) 설정
+	@Bean
+	AuthenticationManager authenticationManager() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(bCryptPasswordEncoder());
+		return new ProviderManager(authProvider);
+	}
+
+	// 암호화 빈
+	@Bean
+	BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+}

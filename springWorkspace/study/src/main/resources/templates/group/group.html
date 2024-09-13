@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras-security"
+	layout:decorate="~{layouts/default_group}">
+	<div  layout:fragment="index" class="container mt-5 pt-5">
+		<main class="text-center">
+			<p class="fs-1">[[${#authentication.name}]] 님! 안녕하세요</p>
+		</main>
+	</div>
+</html>

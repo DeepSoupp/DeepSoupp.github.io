@@ -1,0 +1,9 @@
+package com.kosta.service;
+
+import com.kosta.domain.request.UserSIgnUpRequest;
+import com.kosta.domain.response.UserResponse;
+
+public interface UserService {
+	// 
+	UserResponse join(UserSIgnUpRequest sign);
+}

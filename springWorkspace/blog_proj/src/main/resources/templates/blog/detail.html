@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/template}">
+<main layout:fragment="main" class="container my-5">
+	<article class='border border-3 rounded p-5'>
+		<header class="mb-4 d-flex justify-content-between">
+			<h3 class="fw-bolder mb-1 text-truncate">[[${article.title}]]</h3>
+			<div class="text-muted fst-italic mb-2 text-truncate">[[
+				|${#temporals.format(article.updatedAt, 'yyyy-MM-dd HH:mm')}| ]]</div>
+		</header>
+		<section class="mb-5">
+			<p class="fs-5 mb-4">[[${article.content}]]</p>
+		</section>
+		<hr />
+		<a href="/blog/list" class='btn btn-primary btn-sm'> 목록으로 이동 </a> <a
+			th:if="${#authentication.principal.id eq article.creator.id}"
+			th:href="@{'/blog/modify/' + ${article.id}}"
+			class='btn btn-success btn-sm'> 수정 </a>
+		<form th:if="${#authentication.principal.id eq article.creator.id}"
+			class='d-inline' th:action="@{'/blog/delete/' + ${article.id}}"
+			th:method="DELETE">
+			<button class='btn btn-danger btn-sm'>삭제</button>
+		</form>
+	</article>
+</main>
+</html>

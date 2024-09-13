@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras-security"
+      layout:decorate="~{layouts/default_group}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>프로필 수정 - Study Group</title>
+</head>
+
+<body>
+    <div layout:fragment="index" class="container mt-4">
+        <div class="custom-card">
+            <h2 class="mb-3">프로필 수정</h2>
+            <hr class="my-4">
+            <form method="post" action="/group/profile">
+                <div class="mb-3">
+                    <label for="newNickname" class="form-label">새 닉네임</label>
+                    <input type="text" id="newNickname" name="newNickname" class="form-control"
+                           placeholder="새 닉네임을 입력하세요" required
+                           th:value="${user.name}">
+                </div>
+                <button type="submit" class="btn btn-primary">수정하기</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

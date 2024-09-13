@@ -1,0 +1,16 @@
+package com.kosta.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import lombok.Value;
+
+@Configuration
+@EnableWebMvc
+public class WebMvcConfig implements WebMvcConfigurer {
+	// application.yml 파일의 location 가져오기
+	@Value("${spring.upload.location}")
+	private String uploadPath;
+
+}

@@ -1,0 +1,60 @@
+package com.kosta.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.util.AntPathMatcher;
+
+import lombok.RequiredArgsConstructor;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class WebSecurityConfig {
+//	1. **프로젝트 설정 및 종속성 추가**:
+//	    - Spring Boot 프로젝트를 생성합니다.
+//	    - 필요한 종속성을 `pom.xml` 또는 `build.gradle`에 추가합니다.
+//	    - ex
+//	        - `spring-boot-starter-security`, `jjwt`, `spring-boot-starter-web`, `spring-boot-starter-data-jpa`.
+//	2. **`WebSecurityConfig` 클래스 설정**:
+//	    - `SecurityFilterChain`을 구성하여 HTTP 요청에 대한 보안 설정을 합니다.
+//	    - `JwtProvider`, `JwtAuthenticationService`, `TokenUtils`와 같은 빈을 설정합니다.
+//	    - JWT 필터(`JwtAuthenticationFilter`)와 로그인 필터(`LoginCustomAuthenticationFilter`)를 추가합니다.
+//	3. **JWT 관련 설정**:
+//	    - `JwtProperties` 클래스를 만들어 JWT의 설정(발행자, 비밀 키, 토큰 만료 시간 등)을 저장합니다.
+//	    - `JwtProvider` 클래스를 구현하여 JWT를 생성하고 검증하는 메서드를 추가합니다.
+//	4. **Authentication 필터 구현**:
+//	    - `LoginCustomAuthenticationFilter` 클래스를 작성하여 로그인 요청을 처리하고 인증을 수행합니다.
+//	    - `JwtAuthenticationFilter` 클래스를 작성하여 JWT를 검증하고 인증 정보를 `SecurityContextHolder`에 설정합니다.
+//	5. **토큰 유틸리티 클래스 구현**:
+//	    - `TokenUtils` 클래스를 작성하여 JWT를 생성하고 응답에 포함시키는 메서드를 구현합니다.
+//	    - Refresh Token을 쿠키에 설정하는 메서드도 포함합니다.
+
+	// 1. SecurityFilterChain 구성
+	// HRRP 요청에 따른 보안 구성
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		// 경로 권한을 설정하자
+		http.authorizeHttpRequests(auth ->
+		// 특정 URL 경로에대해 인증 없이 접근 가능
+		auth.requestMatchers("/api/user/join", // 회원가입 입니다
+				"/api/user/duplicate", // 이메일 중복체크
+				"/api/product", // 상품 목록
+				"/api/product/detail", // 상품 디테일 -> 뒤에 * 해야하나? id 있을텐데 아마
+				"/api/user/refresh-token") // 토큰 재발급
+				.permitAll() // 인증 없이 가능
+				.requestMatchers("/api/product").hasRole("ADMIN") // ProductController 중 나머지는 관리자만 !
+				.anyRequest().authenticated()); // 그 외에는 인증한 사용자만
+		return http.getOrBuild();
+	}
+
+	// 암호화 빈
+	@Bean
+	BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+}

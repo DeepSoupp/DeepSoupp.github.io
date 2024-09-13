@@ -1,0 +1,7 @@
+1724288862306	Rename resource 'application.properties'
+1724289571258	Rename type 'repo'
+1724292340570	Extract local variable 'byId'
+1724292422800	Extract local variable 'orElseThrow'
+1724293104811	Extract local variable 'originArticle'
+1724293781755	Extract local variable 'byId'
+1724314546266	Extract local variable 'orElseThrow'

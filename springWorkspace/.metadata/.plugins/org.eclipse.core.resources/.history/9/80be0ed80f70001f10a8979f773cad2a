@@ -1,0 +1,11 @@
+package com.kosta.domain.request;
+
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
+public class UserJoinRequest {
+	private String email, name, password;
+
+}

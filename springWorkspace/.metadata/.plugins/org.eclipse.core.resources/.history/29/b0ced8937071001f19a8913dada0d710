@@ -1,0 +1,42 @@
+package com.kosta.service.Impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kosta.domain.request.ProductAddRequest;
+import com.kosta.domain.request.ProductDeleteRequest;
+import com.kosta.domain.request.ProductEditRequest;
+import com.kosta.domain.response.ProductResponse;
+import com.kosta.service.ProductService;
+
+@Service
+public class ProductServiceImpl implements ProductService {
+
+	@Override
+	public ProductResponse addProdict(ProductAddRequest product, MultipartFile file) {
+		return null;
+	}
+
+	@Override
+	public ProductResponse deleteProduct(Long id, ProductDeleteRequest product) {
+		return null;
+	}
+
+	@Override
+	public ProductResponse editProduct(ProductEditRequest product, MultipartFile file) {
+		return null;
+	}
+
+	@Override
+	public ProductResponse getProductById(Long id) {
+		return null;
+	}
+
+	@Override
+	public List<ProductResponse> getAllProduct() {
+		return null;
+	}
+
+}

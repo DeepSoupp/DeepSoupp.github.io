@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!-- 타임리프의 속성들은 th:으로 시작한다 -->
+<!-- 이를 통해 데이터를 바인딩하거나, 포현식을 사용할 수 있다 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- ${변수} Spring 모델에서 변수를 가져와서 사용 -->
+	<!-- 텍스트 내용을 서버의 데이터로 변경 -->
+	<p th:text="${variable}">이곳에 변수값을 대체해 !!</p>
+	<!-- 텍스트 내용을 서버의 데이터로 변경 HTML 태그인식-->
+	<p th:utext="${variable2}">이곳에 변수값을 대체해 !!</p>
+
+	<!-- 응용 -->
+	<h1>사용자 정보</h1>
+	<ul>
+		<li th:text="${user.id}"></li>
+		<li th:text="${user.name}"></li>
+		<li th:text="${user.addr}"></li>
+	</ul>
+
+	<!-- @{} : URL 링크를 생성 -->
+	<div>
+		<a th:href="@{https://google.com/search(q=${user.name})}">google</a>
+	</div>
+	<div>
+		<a th:href="@{/search(keyword=${user.name})}">자체검색</a>
+	</div>
+</body>
+</html>

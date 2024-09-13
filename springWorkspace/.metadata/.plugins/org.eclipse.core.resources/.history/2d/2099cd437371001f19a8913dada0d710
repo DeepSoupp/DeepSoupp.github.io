@@ -1,0 +1,18 @@
+package com.kosta.controller;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.kosta.service.ProductService;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/product")
+public class ProductContoller {
+	@Value("${spring.upload.location}")
+	private String uploadPath;
+	private final ProductService productService;
+}

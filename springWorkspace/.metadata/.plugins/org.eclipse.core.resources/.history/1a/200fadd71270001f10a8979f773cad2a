@@ -1,0 +1,31 @@
+package com.kosta.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.kosta.domain.request.UserJoinRequest;
+import com.kosta.domain.response.UserResponse;
+import com.kosta.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+@Slf4j
+@RestController
+@RequestMapping("/api/user")
+@RequiredArgsConstructor
+public class UserController {
+	private UserService userService;
+	
+	@PostMapping("join")
+	public ResponseEntity<UserResponse> join(@RequestBody UserJoinRequest userJoinRequest) {
+		log.info("[userJoin] 회원가입 진행, 요청정보 : {}",userJoinRequest);
+		UserResponse joinUser = userService.join(userJoinRequest);
+		return entity;
+	}
+	
+}

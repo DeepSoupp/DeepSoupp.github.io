@@ -1,0 +1,31 @@
+package com.kosta.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+
+import lombok.RequiredArgsConstructor;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class WebSecurityConfig {
+
+	// 암호화 빈
+	@Bean
+	BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .csrf().disable() // CSRF 보호 비활성화 (테스트 용도)
+            .authorizeRequests()
+            .antMatchers("/api/user/join", "/api/user/duplicate").permitAll() // 특정 경로에 대한 접근 허용
+            .anyRequest().authenticated(); // 나머지 요청은 인증 필요
+    }
+}

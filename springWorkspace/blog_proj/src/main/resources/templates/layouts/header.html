@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<header th:fragment="h" class="p-5 mb-5 text-center bg-dark-subtle">
+	<h1 class="mb-3">BLOG</h1>
+	<h4 class="mb-3">WELCOME !</h4>
+		 <div>
+            <button sec:authorize="isAuthenticated()" onclick="location.href='/logout'" class="btn btn-secondary">
+                로그아웃
+            </button>
+            <button sec:authorize="!isAuthenticated()" onclick="location.href='/login'" class="btn btn-secondary">
+                로그인
+            </button>
+        </div>
+</header>
+</html>

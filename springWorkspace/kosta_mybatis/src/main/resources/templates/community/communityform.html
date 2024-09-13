@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default}">
+
+
+<div layout:fragment="contents" class="container my-4"
+	style="padding-top: 60px">
+	<h2 class="mb-4">게시글 작성</h2>
+	<form action="/community/add" method="post"
+		enctype="multipart/form-data">
+		<div class="mb-3">
+			<label for="title" class="form-label">Title</label> <input
+				type="text" class="form-control" name="title" placeholder="제목을 입력해"
+				required>
+		</div>
+		<div class="mb-3">
+			<label for="content" class="form-label">Content</label>
+			<textarea rows="5" class="form-control" name="content"
+				placeholder="내용을 입력해" required></textarea>
+		</div>
+		<div class="mb-3">
+			<label for="creatorId" class="form-label">Writer</label> <select
+				class="form-control" name="creatorId" id="creatorId" required>
+				<option selected >작성자를 선택해</option>
+				<option selected value="8">보라돌이</option>
+				<option selected value="9">뚜비</option>
+				<option selected value="10">나나</option>
+				<option selected value="11">뽀</option>
+				<option selected value="12">텔레토비</option>
+			</select>
+		</div>
+		<div class="mb-3"><label for="files" class="form-label">Image</label>
+					<input type="file" class="form-control" name="files" accept="img/*"
+						multiple>
+		
+				</div>
+		<button type="reset">Reset</button>
+		<button type="submit">Submit</button>
+
+	</form>
+</div>
+
+</html>

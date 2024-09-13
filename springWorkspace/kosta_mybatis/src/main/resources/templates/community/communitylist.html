@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default}">
+
+
+<div layout:fragment="contents" class="container my-4"
+	style="padding-top: 60px">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>조회수</th>
+				<th>작성일</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="comm : ${list}" th:onclick="| location.href = '/community/detail/${comm.id}'|" role="button">
+				<td>[[${comm.id}]]</td>
+				<td>[[${comm.title}]]</td>
+				<td>[[${comm.creator.name}]]</td>
+				<td>[[${comm.hit}]]</td>
+				<td>[[${#temporals.format(comm.createdAt,'yyyy년 MM월 dd일')}]]</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="/community/add" class="btn btn-primary">Write</a>
+
+</div>
+
+</html>

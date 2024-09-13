@@ -1,0 +1,14 @@
+1724984368747	Copy package
+1724984375765	Copy package
+1724984384236	Copy package
+1724984390376	Copy package
+1724984561380	Rename resource 'application.properties'
+1724984943692	Delete element
+1724985353724	Copy compilation unit
+1724989432199	Copy compilation unit
+1724989746557	Extract local variable 'setEntity'
+1724989870575	Extract local variable 'save'
+1725001873743	Extract local variable 'byId'
+1725005209310	Extract local variable 'byId'
+1725005242689	Extract local variable 'product'
+1725005311535	Extract local variable 'save'

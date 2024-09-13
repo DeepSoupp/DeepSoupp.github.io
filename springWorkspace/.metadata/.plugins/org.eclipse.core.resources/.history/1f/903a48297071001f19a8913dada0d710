@@ -1,0 +1,37 @@
+package com.kosta.service.Impl;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kosta.domain.FileDTO;
+import com.kosta.entity.ImageFile;
+import com.kosta.repository.ImageFileRepository;
+import com.kosta.service.ImageFileService;
+import com.kosta.utils.FileUtils;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class ImageFileServiceImpl implements ImageFileService {
+	private final FileUtils fileUtils;
+	private final ImageFileRepository imageFileRepository;
+
+	@Override
+	public ImageFile saveImage(MultipartFile file) {
+		if (file != null) {
+			ImageFile imageFile = fileUtils.fileUpload(file);
+
+			if (imageFile != null) {
+				ImageFile savedImageFile = imageFileRepository.save(imageFile);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public FileDTO getImageByImageId(Long id) {
+		return null;
+	}
+
+}

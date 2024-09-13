@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default}">
+<th:block layout:fragment="css">
+	<style>
+.active {
+	color: purple
+}
+
+.inactive {
+	color: tomato
+}
+</style>
+</th:block>
+<div layout:fragment="content">
+	<h1 th:text="${keyword}+'의 친구들'"></h1>
+	<!-- 반복문 th:each="반복자 : 리스트변수" -->
+	<ul>
+		<li th:each="friend : ${list}"
+			th:text="${friend.name} + ' : '+${friend.addr}"></li>
+	</ul>
+	<h1 th:text="${keyword}+'의 텔레토비 친구들'"></h1>
+	<!-- 조건문 -->
+	<ul>
+		<li th:each="tfriend : ${list}" th:if="${tfriend.addr == '텔레토비'}"
+			th:text="${tfriend.name}"></li>
+	</ul>
+	<h1 th:text="${keyword}+'의 텔레토비 친구들'"></h1>
+	<!-- 조건연산 -->
+	<ul>
+		<li th:each="tfriend : ${list}"
+			th:text="${tfriend.addr == '텔레토비' ? tfriend.name : '-'}"></li>
+	</ul>
+	<h1>텔레토비~ 토마토</h1>
+	<ul>
+		<li th:each="friend : ${list}"><span th:text="${friend.name}"
+			th:classappend="${friend.addr == '텔레토비' ? 'inactive' : 'active'}"></span>
+		</li>
+	</ul>
+</div>
+</html>
+

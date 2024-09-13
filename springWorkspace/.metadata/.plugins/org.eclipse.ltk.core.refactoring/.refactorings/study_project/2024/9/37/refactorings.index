@@ -1,0 +1,10 @@
+1726035235767	Rename resource 'application.properties'
+1726038636393	Copy compilation unit
+1726039869785	Rename type 'UserSIgnUpRequest'
+1726041076808	Extract local variable 'join'
+1726101724307	Extract local variable 'encode'
+1726104432154	Copy compilation unit
+1726105435523	Copy compilation unit
+1726188281960	Copy compilation unit
+1726188340540	Copy compilation unit
+1726210084143	Extract local variable 'authorities'

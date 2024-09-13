@@ -1,0 +1,9 @@
+package com.kosta.security;
+
+public class JwtProperties {
+
+	public long getAccessDuration() {
+		return 0;
+	}
+
+}

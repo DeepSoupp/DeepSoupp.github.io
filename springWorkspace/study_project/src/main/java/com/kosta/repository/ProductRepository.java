@@ -1,0 +1,12 @@
+package com.kosta.repository;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.kosta.entity.Product;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long>{
+	// JpaRepository 상속받아 Product 엔티티에 대한 CRUD 작업 제공
+}

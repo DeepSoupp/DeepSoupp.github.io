@@ -1,0 +1,6 @@
+package com.kosta.domain.request;
+
+public class UserSIgnUpRequest {
+	private String email, name, password;
+
+}

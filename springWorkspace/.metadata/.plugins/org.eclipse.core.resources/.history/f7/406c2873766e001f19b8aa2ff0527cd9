@@ -1,0 +1,29 @@
+package com.kosta.config;
+
+import java.io.IOException;
+
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequiredArgsConstructor
+public class JwtAuthenticationFilter extends OncePerRequestFilter{
+	private final JwtProvider jwtProvider;
+	private final static String HEADER_AUTHORIZATION = "Authorization";
+	private final static String TOKEN_PREFOX = "Bearer ";
+	
+	
+	// HTTP 요청이 들어올 떄마다 실행되는 필터
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		
+	}
+	
+}

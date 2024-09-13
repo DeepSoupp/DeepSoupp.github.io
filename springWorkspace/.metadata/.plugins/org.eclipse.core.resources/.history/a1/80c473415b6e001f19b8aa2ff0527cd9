@@ -1,0 +1,67 @@
+package com.kosta.service;
+
+import java.util.List;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.kosta.domain.UserSignUpRequest;
+import com.kosta.domain.UserDeleteRequest;
+import com.kosta.domain.UserResponse;
+import com.kosta.domain.UserUpdateRequest;
+import com.kosta.entity.User;
+import com.kosta.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+	private final UserRepository userRepository;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Override
+	public UserResponse signUp(UserSignUpRequest sign) {
+		String eccodedPassword =bCryptPasswordEncoder.encode(UserSignUpRequest.getPassword())
+		User user = User.builder().email(sign.getEmail()).name(sign.getName()).password(sign.getPassword()).build();
+		User savedUser = userRepository.save(user);
+		return UserResponse.toDTO(savedUser);
+
+	}
+
+	@Override
+	public List<UserResponse> getUserList() {
+		List<User> userList = userRepository.findAll();
+		return userList.stream().map(UserResponse::toDTO).toList();
+	}
+
+	@Override
+	public UserResponse updateUser(UserUpdateRequest update) {
+		User user = userRepository.findByEmail(update.getEmail())
+				.orElseThrow(() -> new IllegalArgumentException("없는 이메일"));
+		if (!update.getPassword().equals(update.getPassword())) {
+			throw new RuntimeException("비밀번호 떙");
+		}
+		if (update.getName() != null) {
+			user.setName(update.getName());
+		}
+		User updatedUser = userRepository.save(user);
+		return UserResponse.toDTO(updatedUser);
+	}
+
+	@Override
+	public void deleteUser(UserDeleteRequest userDeleteRequest) {
+		User user = userRepository.findByEmail(userDeleteRequest.getEmail())
+				.orElseThrow(() -> new IllegalArgumentException("실패!!!!"));
+		if (!user.getPassword().equals(userDeleteRequest.getPassword())) {
+			throw new RuntimeException("비밀번호 실패!!!");
+		}
+		userRepository.delete(user);
+	}
+
+	@Override
+	public boolean duplicateCheckEmail(String email) {
+		return !userRepository.existsByEmail(email);
+	}
+
+}

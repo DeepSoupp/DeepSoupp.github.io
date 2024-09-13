@@ -1,0 +1,26 @@
+package com.kosta.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
+
+import com.kosta.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class JwtProvider {
+	private final UserDetailsService userDetailsService;
+	private final JwtProperties jwtProperties;
+	private final UserRepository userRepository;
+
+	// JWT PROVIDER
+	@Bean
+	JwtProvider jwtProvider() {
+		return new JwtProvider(userDetailsService, jwtProperties);
+	}
+
+}

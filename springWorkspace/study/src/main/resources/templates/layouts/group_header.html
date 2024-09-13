@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="h" class="bg-dark text-white py-4 mt-5">
+    <div class="bg-dark text-center py-4 fixed-top">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="display-3 mb-0">
+                    <a href="/group" class="text-white text-decoration-none">STUDY GROUP</a>
+                </h1>
+                <form action="/logout" method="post">
+                    <button type="submit" class="btn btn-outline-light">로그아웃</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 110px;"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/group">MENU LIST</a>
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/group/list">스터디 목록보기</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            마이페이지
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/group/profile">프로필 수정</a></li>
+                            <li><a class="dropdown-item" href="/group/mygroup">내가 만든 스터디</a></li>
+                            <li><a class="dropdown-item" href="/group/joingroup">참여중 스터디 목록</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+</html>

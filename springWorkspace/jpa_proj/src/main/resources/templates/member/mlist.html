@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="/search">
+	<input name="keyword" placeholder="검색어 입력">
+	<button>검색</button>
+</form>
+    <div>
+        <p th:each="m : ${list}">
+            [[${m.name}]]
+            <a th:href="@{'/delete/'+${m.id}}">삭제</a>
+            <a th:href="@{'/modify/'+${m.id}}">수정</a>
+        </p>
+    </div>
+    <a href="/add">추가</a>
+</body>
+</html>

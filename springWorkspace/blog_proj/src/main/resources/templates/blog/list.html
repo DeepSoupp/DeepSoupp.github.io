@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{layouts/template}">
+
+<main layout:fragment="main" class="container my-5">
+	<div class="d-flex justify-content-between">
+		<form action="/blog/list" class="d-flex">
+			<div class="d-flex flex-column">
+				<input class="form-control form-control-sm mb-1" name="keyword"
+					placeholder="검색어를 입력하세요" /> <select name="order"
+					class="form-control form-control-sm d-inline-block">
+					<option value="asc" selected>오름차순</option>
+					<option value="desc">내림차순</option>
+				</select>
+			</div>
+			<button class="btn btn-outline-dark btn-sm mx-2 align-self-center">검색</button>
+		</form>
+
+		<a href="/blog/add" class='btn btn-success btn align-self-center'
+			sec:authorize="isAuthenticated()">글쓰기</a>
+	</div>
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+		<div class="col" th:each="article : ${list}">
+			<div class="card mt-4 border border-2 border-success"
+				style="height: 150px">
+				<div class="card-header bg-success-subtle">[[${article.id}]]</div>
+				<div class="card-body"
+					th:onclick="|location.href='/blog/detail/'+${article.id}|"
+					role='button'>
+					<h5 class="card-title">[[${article.title}]]</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+</html>

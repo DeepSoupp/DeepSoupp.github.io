@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default}">
+<div layout:fragment="contents" class="container my-4"
+	style="padding-top: 60px">
+	<h2 class="mb-4">회원 리스트</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Registration Date</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user : ${userList}"
+				th:onclick='|location.href="/user/detail/${user.id}"|'>
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.name}"></td>
+				<td th:text="${user.email}"></td>
+				<td th:text="${#temporals.format(user.createdAt, 'yyyy년 MM월 dd일')}"></td>
+				<td>
+					<form th:action="@{/user/delete(id=${user.id})}" th:method="DELETE">
+						<button class='btn btn-danger'>DELETE</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="/user/add" class="btn btn-success">Sign up</a>
+</div>
+</html>

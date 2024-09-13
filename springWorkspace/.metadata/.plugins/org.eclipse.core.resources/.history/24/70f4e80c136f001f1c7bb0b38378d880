@@ -1,0 +1,13 @@
+package com.kosta.util;
+
+import org.springframework.stereotype.Component;
+
+import com.kosta.config.JwtProvider;
+
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
+public class TokenUtils {
+	private final JwtProvider jwtProvider;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_group}">
+<head>
+    <meta charset="UTF-8">
+    <title>Study Group</title>
+</head>
+<body>
+    <div layout:fragment="index">
+        <div class="custom-card">
+            <h2 class="my-page-card-title">참여중 스터디 목록</h2>
+            <hr class="my-4">
+            <div th:each="group : ${grouplist}">
+            <div class="my-page-card-body">
+            	<p>그룹명 : [[${group.groupTitle}]]</p>
+            	<p style="font-weight: 900">[[${group.leader.name}]]</p>
+            	<p th:each="member : ${group.memberList}">[[${member.name}]]</p>
+           	</div>
+            <hr class="my-4">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
